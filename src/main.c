@@ -30,7 +30,8 @@ int main(int argc, char *argv[])
     }
     
     while (*++argv) {
-        signed long long int x = 0;
+        mpz_t n;
+        mpz_init(n);
 
         for (size_t i = 0; i < strlen(*argv); ++i) {
             /** Check for the initial prefix hex values sometimes have: '0x'.
@@ -68,22 +69,22 @@ int main(int argc, char *argv[])
             }
 
             if (is_valid_hex_alpha_upper((*argv)[i])) {
-                x *= 16;
-                x += (*argv)[i] - 'A' + 10;
+                mpz_mul_si(n, n, 16);
+                mpz_add_ui(n, n, (unsigned long int) (*argv)[i] - 'A' + 10);
 
                 continue;
             }
 
             if (is_valid_hex_alpha_lower((*argv)[i])) {
-                x *= 16;
-                x += (*argv)[i] - 'a' + 10;
+                mpz_mul_si(n, n, 16);
+                mpz_add_ui(n, n, (unsigned long int) (*argv)[i] - 'a' + 10);
 
                 continue;
             }
 
             if (is_valid_num((*argv)[i])) {
-                x *= 16;
-                x += (*argv)[i] - '0';
+                mpz_mul_si(n, n, 16);
+                mpz_add_ui(n, n, (unsigned long int) (*argv)[i] - '0');
 
                 continue;
             }
@@ -93,7 +94,8 @@ int main(int argc, char *argv[])
             return EXIT_SUCCESS;
         }
 
-        printf("%lld\n", x);
+        gmp_printf("%Zd\n", n);
+        mpz_clear(n);
     }
 
     return EXIT_SUCCESS;

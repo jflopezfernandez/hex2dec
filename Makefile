@@ -2,10 +2,13 @@
 vpath %.c src
 vpath %.h include
 
+CP       = cp -f -u
+RM       = rm -f
+
 CC       = gcc
-CFLAGS   = -std=c17 -Wall -Wextra -Wpedantic
+CFLAGS   = -std=c17 -Wall -Wextra -Wpedantic -O3 -mtune=intel -march=skylake
 CPPFLAGS = -D_POSIX_C_SOURCE -D_GNU_SOURCE
-LDFLAGS  = -lm 
+LDFLAGS  = -lm -lgmp
 
 TARGET   = hex2dec
 
@@ -21,4 +24,11 @@ main.o: main.c
 clean:
 	$(RM) ./*.{o,asm,lst} $(TARGET)
 
+.PHONY: install
+install: $(TARGET)
+	$(CP) ./$(TARGET) /usr/bin
+
+.PHONY: uninstall
+uninstall:
+	$(RM) /usr/bin/$(TARGET)
 

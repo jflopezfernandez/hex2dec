@@ -14,6 +14,8 @@
 #include <signal.h>
 #include <time.h>
 
+#include <gmp.h>
+
 #if !defined(FALSE) || !defined(TRUE)
 enum { FALSE, TRUE };
 #endif // FALSE || TRUE
