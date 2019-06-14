@@ -1,47 +1,33 @@
 
 #include "hex2dec.h"
 
-int is_valid_num(char c) {
-    return ((c >= '0') && (c <= '9'));
-}
+/** ***************************************************************************
+ *
+ *                                MAIN.C
+ *
+ *  ***************************************************************************
+ *
+ *      Author:     Jose Fernando Lopez Fernandez
+ *
+ *      Date:       14 June, 2019
+ *
+ *      Description:
+ *
+ *          This is the entry point of the hex2dec application. This file 
+ *          contains the main function, which parses the command-line options 
+ *          and processes the inputs to convert.
+ *
+ *  **************************************************************************/
 
-int is_valid_hex_alpha_upper(char c) {
-    return ((c >= 'A') && (c <= 'F'));
-}
+int is_valid_num(char c);
+int is_valid_hex_alpha_upper(char c);
+int is_valid_hex_alpha_lower(char c);
+int is_valid_hex_alpha(char c);
+int is_valid_hex(char c);
 
-int is_valid_hex_alpha_lower(char c) {
-    return ((c >= 'a') && (c <= 'f'));
-}
-
-int is_valid_hex_alpha(char c) {
-    return is_valid_hex_alpha_upper(c) || is_valid_hex_alpha_lower(c);
-}
-
-int is_valid_hex(char c) {
-    return is_valid_num(c) || is_valid_hex_alpha(c);
-}
-
-void print_license_info(void) {
-    printf("This program is free software; you may redistribute it under the terms of\n");
-    printf("the GNU General Public License version 3 or (at your option) a later version.\n");
-    printf("This program has absolutely no warranty.\n\n");
-}
-
-void print_version_info(void) {
-    printf("hex2dec Version 3.0.0\n");
-    printf("Copyright (C) 2019, Jose Fernando Lopez Fernandez.\n\n");
-
-    print_license_info();
-}
-
-void print_help(void) {
-    print_version_info();
-    printf("\n");
-    printf("Usage: hex2dec [OPTIONS] NUMBER [NUMBERS...]\n\n");
-    printf("    -h, --help        Print this help menu and exit\n");
-    printf("        --version     Print program version information and exit\n");
-    printf("    -v, --verbose     Print detailed info during execution\n\n");
-}
+void print_license_info(void);
+void print_version_info(void);
+void print_help(void);
 
 int main(int argc, char *argv[])
 {
@@ -416,3 +402,44 @@ SKIP: /* Safely prevented dereferencing NULL locale pointer */ ;
     return EXIT_SUCCESS;
 }
 
+int is_valid_num(char c) {
+    return ((c >= '0') && (c <= '9'));
+}
+
+int is_valid_hex_alpha_upper(char c) {
+    return ((c >= 'A') && (c <= 'F'));
+}
+
+int is_valid_hex_alpha_lower(char c) {
+    return ((c >= 'a') && (c <= 'f'));
+}
+
+int is_valid_hex_alpha(char c) {
+    return is_valid_hex_alpha_upper(c) || is_valid_hex_alpha_lower(c);
+}
+
+int is_valid_hex(char c) {
+    return is_valid_num(c) || is_valid_hex_alpha(c);
+}
+
+void print_license_info(void) {
+    printf("This program is free software; you may redistribute it under the terms of\n");
+    printf("the GNU General Public License version 3 or (at your option) a later version.\n");
+    printf("This program has absolutely no warranty.\n\n");
+}
+
+void print_version_info(void) {
+    printf("hex2dec Version 3.0.0\n");
+    printf("Copyright (C) 2019, Jose Fernando Lopez Fernandez.\n\n");
+
+    print_license_info();
+}
+
+void print_help(void) {
+    print_version_info();
+    printf("\n");
+    printf("Usage: hex2dec [OPTIONS] NUMBER [NUMBERS...]\n\n");
+    printf("    -h, --help        Print this help menu and exit\n");
+    printf("        --version     Print program version information and exit\n");
+    printf("    -v, --verbose     Print detailed info during execution\n\n");
+}
