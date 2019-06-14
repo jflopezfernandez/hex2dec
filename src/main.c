@@ -451,7 +451,7 @@ void print_version_info(void) {
 
 void print_help(void) {
     print_version_info();
-    printf("\n");
+
     printf("Usage: hex2dec [OPTIONS] NUMBER [NUMBERS...]\n\n");
     printf("    -h, --help        Print this help menu and exit\n");
     printf("        --version     Print program version information and exit\n");
