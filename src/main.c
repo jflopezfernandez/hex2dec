@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
     // hexadecimal number, we will then simply notify the user he failed to provide
     // any arguments and print the help menu.
     if (argc == 1) {
-        fprintf(stderr, "No input(s).\n");
+        fprintf(stderr, "No input(s).\n\n");
 
         print_help();
 
@@ -361,7 +361,21 @@ SKIP: /* Safely prevented dereferencing NULL locale pointer */ ;
             long digits_in_group = 3 - (strlen(num_str) % digits_per_group);
 
             // Print the original input string first
-            printf("%s = ", *argv);
+            for (size_t i = 0; i < strlen(*argv); ++i) {
+                // Always print a lowercase 'x' for the hexadecimal prefix.
+                if ((*argv)[i] == 'x' || (*argv)[i] == 'X') {
+                    printf("x");
+                    continue;
+                }
+
+                // For every other character in the hexadecimal input string,
+                // make sure the alphanumeric characters are printed as upper-
+                // case, even if that is not how they were originally specified.
+                printf("%c", toupper((*argv)[i]));
+            }
+
+            // Print division ' = '
+            printf(" = ");
 
             // Then print the converted string
             for (size_t i = 0; i < strlen(num_str); ++i) {
