@@ -70,6 +70,7 @@ int main(int argc, char *argv[])
     int option_verbose_output = FALSE;
     
     // Check for options
+    // TODO: Add option to print in custom locale as specified via command line.
     for (int i = 1; i < argc; ++i) {
         // Since any options will begin with a dash, there is no need to process
         // any input strings that do not contain a leading dash. Any invalid 
@@ -377,7 +378,7 @@ SKIP: /* Safely prevented dereferencing NULL locale pointer */ ;
             printf("%32s = ", *argv);
 
             // Then print the converted string
-            for (size_t i = 0; i < strlen(num_str) - 1; ++i) {
+            for (size_t i = 0; i < strlen(num_str); ++i) {
                 
                 // Print a separator character after the requisite number of 
                 // digits in a group has been printed. Then reset the counter of
