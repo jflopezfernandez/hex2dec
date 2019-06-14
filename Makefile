@@ -1,9 +1,4 @@
 
-CC       ?= gcc
-CFLAGS   ?= -std=c17 -Wall -Wextra -Wpedantic -O3 -mtune=intel -march=skylake
-CPPFLAGS ?= -D_POSIX_C_SOURCE -D_GNU_SOURCE
-LDFLAGS  ?= -lm -lgmp
-
 vpath %.c src
 vpath %.h include
 

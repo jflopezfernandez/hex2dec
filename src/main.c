@@ -372,10 +372,10 @@ SKIP: /* Safely prevented dereferencing NULL locale pointer */ ;
             // To do this, we set the initial number of digits in the current 
             // group to the length of the string modulo three, giving us the 
             // expected output.
-            long digits_in_group = strlen(num_str) % digits_per_group;
+            long digits_in_group = 3 - (strlen(num_str) % digits_per_group);
 
             // Print the original input string first
-            printf("%32s = ", *argv);
+            printf("%s = ", *argv);
 
             // Then print the converted string
             for (size_t i = 0; i < strlen(num_str); ++i) {
