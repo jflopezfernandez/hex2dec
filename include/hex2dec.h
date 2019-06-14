@@ -13,6 +13,10 @@
 #include <math.h>
 #include <signal.h>
 #include <time.h>
+#include <locale.h>
+#include <wchar.h>
+#include <wctype.h>
+#include <limits.h>
 
 #include <gmp.h>
 

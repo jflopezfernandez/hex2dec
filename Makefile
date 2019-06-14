@@ -1,24 +1,39 @@
 
+CC       ?= gcc
+CFLAGS   ?= -std=c17 -Wall -Wextra -Wpedantic -O3 -mtune=intel -march=skylake
+CPPFLAGS ?= -D_POSIX_C_SOURCE -D_GNU_SOURCE
+LDFLAGS  ?= -lm -lgmp
+
 vpath %.c src
 vpath %.h include
 
-CP       = cp -f -u
-RM       = rm -f
+CP                 = cp -f -u
+RM                 = rm -f
 
-CC       = gcc
-CFLAGS   = -std=c17 -Wall -Wextra -Wpedantic -O3 -mtune=intel -march=skylake
-CPPFLAGS = -D_POSIX_C_SOURCE -D_GNU_SOURCE
-LDFLAGS  = -lm -lgmp
+OBJS               = main.o
+
+COMPILER           = $(CC)
+PREPROCESSOR_FLAGS = -I include -D_POSIX_C_SOURCE -D_GNU_SOURCE $(CPPFLAGS)
+COMPILATION_FLAGS  = $(CFLAGS)
+
+LINKER             = $(COMPILER)
+LINKER_FLAGS       = $(LDFLAGS)
+LIBRARIES          = -lm -lgmp $(LIBS)
+
+COMPILE            = $(COMPILER) $(PREPROCESSOR_FLAGS) $(COMPILATION_FLAGS) -c
+LINK               = $(LINKER) $(COMPILATION_FLAGS) $(LINKER_FLAGS) $(LIBRARIES)
+OUTPUT             = -o $@
+DEPENDENCIES       = $^
 
 TARGET   = hex2dec
 
 all: $(TARGET)
 
-$(TARGET): main.o
-	$(CC) $(CFLAGS) $(CPPFLAGS) -I include -o $@ $^ $(LDFLAGS)
+$(TARGET): $(OBJS)
+	$(LINK) $(OUTPUT) $(DEPENDENCIES)
 
-main.o: main.c
-	$(CC) $(CFLAGS) $(CPPFLAGS) -I include -c -o $@ $^
+%.o: %.c
+	$(COMPILE) $(OUTPUT) $(DEPENDENCIES)
 
 .PHONY: clean
 clean:
